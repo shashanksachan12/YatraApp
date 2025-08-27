@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container1 {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+section {
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pic-phase2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.pic-phase2 img {
+    width: 48%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.feedback {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.imgfb img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+}
+
+.fbcontent {
+    flex: 1;
+}
+
+.next-page {
+    margin-top: 20px;
+}
+
+#search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#comment {
+    margin-top: 20px;
+}
+
+.about-place {
+    margin-top: 20px;
+}
+.pic-phase2 img:hover {
+    transform: scale(1.2);
+    overflow: hidden;
+}
+.next-page {
+    margin: 50px auto;
+    padding: 20px;
+    min-width: 250px;
+    border-radius: 8px;
+    background-image: url(tajmahal.jpg);
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment:scroll;
+    height: 100vh;
+    width: auto;
+    border: solid rgb(35, 135, 198)1px;
+    box-shadow: 0 0 1rem blueviolet;
+    color: rgb(20, 30, 30);
+    font-size: xx-large;
+    text-shadow: 0 0 0.5rem black;
+    text-align: center;
+}
+.about-place {
+    padding: 1rem;
+    background-color: black;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .pic-phase2 img {
+        width: 100%;
+    }
+
+    .feedback {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .imgfb {
+        margin-bottom: 10px;
+    }
+
+    #search {
+        margin-bottom: 10px;
+    }
+}

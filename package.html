@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav style="background:#0a2239;color:#fff;padding:16px 0 12px 0;box-shadow:0 2px 8px #eee;">
+        <div style="max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:2rem;font-weight:bold;letter-spacing:2px;">Travel Explorer</div>
+            <div style="display:flex;gap:18px;">
+                <a href="index.html" style="color:#fff;text-decoration:none;font-size:1.1rem;">Home</a>
+                <a href="package.html" style="color:#fff;text-decoration:none;font-size:1.1rem;">Packages</a>
+                <a href="login.html" style="color:#fff;text-decoration:none;font-size:1.1rem;">Login</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="max-width:1100px;margin:auto;padding:0 10px;">
+        <!-- Hero Section -->
+        <section style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px 0;margin:30px 0 20px 0;">
+            <div style="flex:1 1 350px;min-width:270px;">
+                <h1 style="font-size:2.5rem;margin-bottom:10px;color:#0a2239;">Discover India's Wonders</h1>
+                <p style="font-size:1.2rem;color:#333;max-width:500px;">Explore the best destinations, from the Himalayas to the beaches, with real images and highlights. Click a state to see its top places!</p>
+            </div>
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="India Travel" style="width:340px;max-width:100%;border-radius:12px;box-shadow:0 4px 24px #bbb;">
+        </section>
+        <h2 style="margin-top:0;">Find Proper Destinations:</h2>
+        <ul id="state-list" style="display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0 0 10px 0;">
+            <li class="state-item" data-state="Andhra Pradesh">Andhra Pradesh</li>
+            <li class="state-item" data-state="Arunachal Pradesh">Arunachal Pradesh</li>
+            <li class="state-item" data-state="Assam">Assam</li>
+            <li class="state-item" data-state="Bihar">Bihar</li>
+            <li class="state-item" data-state="Chhattisgarh">Chhattisgarh</li>
+            <li class="state-item" data-state="Goa">Goa</li>
+            <li class="state-item" data-state="Gujarat">Gujarat</li>
+            <li class="state-item" data-state="Haryana">Haryana</li>
+            <li class="state-item" data-state="Himachal Pradesh">Himachal Pradesh</li>
+            <li class="state-item" data-state="Jharkhand">Jharkhand</li>
+            <li class="state-item" data-state="Karnataka">Karnataka</li>
+            <li class="state-item" data-state="Kerala">Kerala</li>
+            <li class="state-item" data-state="Madhya Pradesh">Madhya Pradesh</li>
+            <li class="state-item" data-state="Maharashtra">Maharashtra</li>
+            <li class="state-item" data-state="Manipur">Manipur</li>
+            <li class="state-item" data-state="Meghalaya">Meghalaya</li>
+            <li class="state-item" data-state="Mizoram">Mizoram</li>
+            <li class="state-item" data-state="Nagaland">Nagaland</li>
+            <li class="state-item" data-state="Odisha">Odisha</li>
+            <li class="state-item" data-state="Punjab">Punjab</li>
+            <li class="state-item" data-state="Rajasthan">Rajasthan</li>
+            <li class="state-item" data-state="Sikkim">Sikkim</li>
+            <li class="state-item" data-state="Tamil Nadu">Tamil Nadu</li>
+            <li class="state-item" data-state="Telangana">Telangana</li>
+            <li class="state-item" data-state="Tripura">Tripura</li>
+            <li class="state-item" data-state="Uttar Pradesh">Uttar Pradesh</li>
+            <li class="state-item" data-state="Uttarakhand">Uttarakhand</li>
+            <li class="state-item" data-state="West Bengal">West Bengal</li>
+        </ul>
+        <!-- Modal for State Places -->
+        <div id="stateModal" style="display:none;position:fixed;z-index:2000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;overflow:auto;">
+            <div id="stateModalContent" style="background:#fff;padding:30px 20px 20px 20px;max-width:700px;margin:40px auto;border-radius:8px;position:relative;box-shadow:0 0 20px #222;">
+                <span id="closeStateModal" style="position:absolute;top:10px;right:20px;font-size:32px;color:#333;cursor:pointer;">&times;</span>
+                <div id="statePlaces"></div>
+            </div>
+        </div>
+    <script>
+    // --- State to places data (add more as needed) ---
+    const statePlacesData = {
+        'Andhra Pradesh': [
+            {name: 'Tirupati Temple', img: 'temple.jpg', highlight: 'Famous pilgrimage site and spiritual center.'},
+            {name: 'Araku Valley', img: 'mountain.jpg', highlight: 'Scenic hill station with coffee plantations.'}
+        ],
+        'Arunachal Pradesh': [
+            {name: 'Tawang Monastery', img: 'mountain.jpg', highlight: 'Largest monastery in India, surrounded by mountains.'}
+        ],
+        'Assam': [
+            {name: 'Kaziranga National Park', img: 'park.jpg', highlight: 'Home to the one-horned rhinoceros and lush greenery.'}
+        ],
+        'Bihar': [
+            {name: 'Bodh Gaya', img: 'temple.jpg', highlight: 'Site of Buddha’s enlightenment, UNESCO World Heritage.'}
+        ],
+        'Chhattisgarh': [
+            {name: 'Barnawapara Wildlife Sanctuary', img: 'park.jpg', highlight: 'Rich in flora and fauna, wildlife sanctuary.'}
+        ],
+        'Goa': [
+            {name: 'South Goa Beach', img: 'goa.jpg', highlight: 'Famous for its serene beaches and nightlife.'},
+            {name: 'Palolem Beach', img: 'beach.jpg', highlight: 'A scenic crescent-shaped beach.'}
+        ],
+        'Gujarat': [
+            {name: 'Gir National Park', img: 'park.jpg', highlight: 'Home to Asiatic lions and diverse wildlife.'}
+        ],
+        'Haryana': [
+            {name: 'Sultanpur Bird Sanctuary', img: 'park.jpg', highlight: 'Birdwatcher’s paradise with migratory birds.'}
+        ],
+        'Himachal Pradesh': [
+            {name: 'Shimla', img: 'mountain.jpg', highlight: 'Queen of Hills, colonial charm.'}
+        ],
+        'Jharkhand': [
+            {name: 'Betla National Park', img: 'park.jpg', highlight: 'Dense forests and wildlife.'}
+        ],
+        'Karnataka': [
+            {name: 'Coorg', img: 'mountain.jpg', highlight: 'Coffee plantations and misty hills.'}
+        ],
+        'Kerala': [
+            {name: 'Backwaters', img: 'pic2.jpg', highlight: 'Famous for houseboats and lush scenery.'}
+        ],
+        'Madhya Pradesh': [
+            {name: 'Kanha National Park', img: 'park.jpg', highlight: 'Tiger reserve and beautiful forest.'}
+        ],
+        'Maharashtra': [
+            {name: 'Gateway of India', img: 'pic2.jpg', highlight: 'Iconic Mumbai monument and tourist spot.'}
+        ],
+        'Manipur': [
+            {name: 'Loktak Lake', img: 'pic1-blog.jpg', highlight: 'Floating islands (phumdis) and scenic beauty.'}
+        ],
+        'Meghalaya': [
+            {name: 'Cherrapunji', img: 'mountain.jpg', highlight: 'One of the wettest places on earth.'}
+        ],
+        'Mizoram': [
+            {name: 'Phawngpui Hills', img: 'mountain.jpg', highlight: 'Blue Mountain, highest peak in Mizoram.'}
+        ],
+        'Nagaland': [
+            {name: 'Dzukou Valley', img: 'mountain.jpg', highlight: 'Famous for its seasonal flowers and trekking.'}
+        ],
+        'Odisha': [
+            {name: 'Puri Beach', img: 'beach.jpg', highlight: 'Famous for Jagannath Temple and golden sands.'}
+        ],
+        'Punjab': [
+            {name: 'Golden Temple', img: 'temple.jpg', highlight: 'Spiritual center of Sikhism, Amritsar.'}
+        ],
+        'Rajasthan': [
+            {name: 'Jaisalmer', img: 'desert.jpg', highlight: 'Golden Fort and desert safaris.'}
+        ],
+        'Sikkim': [
+            {name: 'Gangtok', img: 'mountain.jpg', highlight: 'Capital city with monasteries and views.'}
+        ],
+        'Tamil Nadu': [
+            {name: 'Meenakshi Temple', img: 'temple.jpg', highlight: 'Architectural marvel in Madurai.'}
+        ],
+        'Telangana': [
+            {name: 'Charminar', img: 'pic1.jpg', highlight: 'Iconic monument in Hyderabad.'}
+        ],
+        'Tripura': [
+            {name: 'Ujjayanta Palace', img: 'pic1-blog.jpg', highlight: 'Royal palace in Agartala.'}
+        ],
+        'Uttar Pradesh': [
+            {name: 'Taj Mahal', img: 'tajmahal.jpg', highlight: 'One of the Seven Wonders of the World.'}
+        ],
+        'Uttarakhand': [
+            {name: 'Mussoorie', img: 'mussoorie.jpg', highlight: 'Queen of the Hills, beautiful weather.'}
+        ],
+        'West Bengal': [
+            {name: 'Darjeeling', img: 'mountain.jpg', highlight: 'Tea gardens and Himalayan views.'}
+        ],
+        'Lakshwadeep': [
+            {name: 'Agatti Beach', img: 'lakshwadeep.jpg', highlight: 'Crystal clear water and coral reefs.'}
+        ]
+    };
+
+    // --- State modal logic ---
+    document.querySelectorAll('.state-item').forEach(item => {
+        item.style.cursor = 'pointer';
+        item.style.background = '#f0f0f0';
+        item.style.padding = '6px 12px';
+        item.style.borderRadius = '4px';
+        item.onmouseover = () => item.style.background = '#d0eaff';
+        item.onmouseout = () => item.style.background = '#f0f0f0';
+        item.onclick = function() {
+            const state = this.getAttribute('data-state');
+            const places = statePlacesData[state] || [];
+            let html = `<h2 style='margin-top:0;'>${state} - Top Places</h2>`;
+            if (places.length === 0) {
+                html += '<p>No data available for this state yet.</p>';
+            } else {
+                html += '<div style="display:flex;flex-wrap:wrap;gap:18px;">';
+                places.forEach(place => {
+                    html += `<div style='flex:1 1 220px;background:#f9f9f9;padding:10px 10px 16px 10px;border-radius:6px;box-shadow:0 2px 8px #eee;text-align:center;'>` +
+                        `<img src='${place.img}' alt='${place.name}' style='width:100%;max-width:180px;height:120px;object-fit:cover;border-radius:4px;box-shadow:0 1px 6px #bbb;margin-bottom:8px;cursor:pointer;' onclick='showModalImg("${place.img}")'>` +
+                        `<h3 style='margin:8px 0 4px 0;'>${place.name}</h3>` +
+                        `<p style='font-size:14px;color:#555;'>${place.highlight}</p>` +
+                    `</div>`;
+                });
+                html += '</div>';
+            }
+            document.getElementById('statePlaces').innerHTML = html;
+            document.getElementById('stateModal').style.display = 'flex';
+        }
+    });
+    document.getElementById('closeStateModal').onclick = function() {
+        document.getElementById('stateModal').style.display = 'none';
+    };
+    window.onclick = function(event) {
+        if (event.target === document.getElementById('stateModal')) {
+            document.getElementById('stateModal').style.display = 'none';
+        }
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            modalImg.src = '';
+        }
+    };
+
+    // Allow modal image preview from state modal too
+    window.showModalImg = function(imgSrc) {
+        modal.style.display = 'flex';
+        modalImg.src = imgSrc;
+        modalImg.alt = '';
+    };
+    </script>
+
+        <section>
+            <br>
+            <h2>Our Some Highlights:</h2>
+            <div class="card-highlight" id="card-highlight" style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;">
+                <div class="card" data-state="Lakshwadeep" style="background:#fff;border-radius:10px;box-shadow:0 2px 12px #e0e0e0;overflow:hidden;transition:transform .2s,box-shadow .2s;width:260px;cursor:pointer;">
+                    <img src="lakshwadeep.jpg" alt="lakshwadeep" class="modal-img" style="width:100%;height:160px;object-fit:cover;">
+                    <div style="padding:16px 12px;">
+                        <h2 style="margin:0 0 6px 0;font-size:1.2rem;">Agatti Beach</h2>
+                        <h3 style="margin:0 0 8px 0;font-size:1rem;color:#0a2239;">Lakshwadeep</h3>
+                        <p style="margin:0;font-size:0.95rem;color:#444;">Crystal clear water and coral reefs.<br><b>1200+ Visitors</b></p>
+                    </div>
+                </div>
+                <div class="card" data-state="Uttarakhand" style="background:#fff;border-radius:10px;box-shadow:0 2px 12px #e0e0e0;overflow:hidden;transition:transform .2s,box-shadow .2s;width:260px;cursor:pointer;">
+                    <img src="Mussoorie.jpg" alt="Uttarakhand" class="modal-img" style="width:100%;height:160px;object-fit:cover;">
+                    <div style="padding:16px 12px;">
+                        <h2 style="margin:0 0 6px 0;font-size:1.2rem;">Mussoorie</h2>
+                        <h3 style="margin:0 0 8px 0;font-size:1rem;color:#0a2239;">Uttarakhand</h3>
+                        <p style="margin:0;font-size:0.95rem;color:#444;">Queen of the Hills, beautiful weather.<br><b>2500+ Visitors</b></p>
+                    </div>
+                </div>
+                <div class="card" data-state="Goa" style="background:#fff;border-radius:10px;box-shadow:0 2px 12px #e0e0e0;overflow:hidden;transition:transform .2s,box-shadow .2s;width:260px;cursor:pointer;">
+                    <img src="goa.jpg" alt="goa" class="modal-img" style="width:100%;height:160px;object-fit:cover;">
+                    <div style="padding:16px 12px;">
+                        <h2 style="margin:0 0 6px 0;font-size:1.2rem;">South Goa Beach</h2>
+                        <h3 style="margin:0 0 8px 0;font-size:1rem;color:#0a2239;">Goa</h3>
+                        <p style="margin:0;font-size:0.95rem;color:#444;">Famous for its serene beaches and nightlife.<br><b>1800+ Visitors</b></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scroll to Top Button -->
+        <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top" style="display:none;position:fixed;bottom:30px;right:30px;z-index:99;font-size:18px;padding:10px 16px;border:none;background:#333;color:#fff;border-radius:4px;cursor:pointer;">↑ Top</button>
+
+        <!-- Modal for Image Preview -->
+        <div id="imgModal" style="display:none;position:fixed;z-index:1000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;">
+            <span id="closeModal" style="position:absolute;top:30px;right:50px;font-size:40px;color:#fff;cursor:pointer;">&times;</span>
+            <img id="modalImage" src="" alt="Preview" style="max-width:80vw;max-height:80vh;display:block;margin:auto;box-shadow:0 0 20px #000;">
+        </div>
+
+        <a href="index.html"><button> Home </button></a>
+    </div>
+
+    <script>
+    // Card hover effect
+    document.querySelectorAll('.card').forEach(card => {
+        card.onmouseover = function() {
+            card.style.transform = 'scale(1.04)';
+            card.style.boxShadow = '0 6px 24px #b0c4de';
+        };
+        card.onmouseout = function() {
+            card.style.transform = '';
+            card.style.boxShadow = '0 2px 12px #e0e0e0';
+        };
+    });
+
+    // Modal image preview (improved)
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+    document.querySelectorAll('.modal-img').forEach(img => {
+        img.addEventListener('click', function() {
+            modal.style.display = 'flex';
+            modalImg.src = this.src;
+            modalImg.alt = this.alt;
+        });
+    });
+    closeModal.onclick = function() {
+        modal.style.display = 'none';
+        modalImg.src = '';
+    };
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            modalImg.src = '';
+        }
+        if (event.target === document.getElementById('stateModal')) {
+            document.getElementById('stateModal').style.display = 'none';
+        }
+    };
+
+    // Scroll to top button
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            scrollBtn.style.display = 'block';
+        } else {
+            scrollBtn.style.display = 'none';
+        }
+    };
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    window.scrollToTop = scrollToTop;
+    </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Booking Site</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("sAf_K_K-eGCbtFxDw"); // Your EmailJS public key
+      })();
+    </script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background: #f9f9f9;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+      }
+      button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      h2 {
+        color: #333;
+      }
+      #ticket-container {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Login Form -->
+      <section>
+        <h2>Login to Travelling Site</h2>
+        <form id="user-login-form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" required />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required />
+          </div>
+          <div class="form-group">
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Newsletter Signup -->
+      <section>
+        <h2>Sign up to our newsletter</h2>
+        <p>Receive latest news and updates every week</p>
+        <input
+          type="email"
+          id="search2"
+          placeholder="Enter your email address"
+        />
+      </section>
+
+      <!-- Travel Booking Form -->
+      <footer>
+        <h2>Book Your Travel</h2>
+        <form id="travel-form">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" required />
+          </div>
+          <div class="form-group">
+            <label for="departure">Departure Date</label>
+            <input type="date" id="departure" required />
+          </div>
+          <div class="form-group">
+            <label for="return">Return Date</label>
+            <input type="date" id="return" required />
+          </div>
+          <div class="form-group">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+        <div id="ticket-container" style="display: none"></div>
+        <br />
+        <a href="index.html"><button>Home</button></a>
+      </footer>
+    </div>
+
+    <script>
+      function setMinBookingDates() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        const minDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById("departure").setAttribute("min", minDate);
+        document.getElementById("return").setAttribute("min", minDate);
+      }
+      setMinBookingDates();
+
+      // Login demo
+      document
+        .getElementById("user-login-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = document.getElementById("login-email").value;
+          alert(`Logged in as: ${email}`);
+          this.reset();
+        });
+
+      // Travel booking handler
+      const form = document.getElementById("travel-form");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const destination = document.getElementById("destination").value.trim();
+        const departureDate = document.getElementById("departure").value;
+        const returnDate = document.getElementById("return").value;
+
+        // Validate email
+        if (!email || !email.includes("@")) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        // Validate dates
+        const today = new Date();
+        const depDate = new Date(departureDate);
+        const retDate = new Date(returnDate);
+        today.setHours(0, 0, 0, 0);
+
+        if (depDate < today || retDate < today) {
+          alert("Please select only future dates for booking.");
+          return;
+        }
+
+        if (retDate < depDate) {
+          alert("Return date cannot be before departure date.");
+          return;
+        }
+
+        // Ticket Preview
+        const ticketHTML = `
+        <div style="border:2px dashed #28a745;padding:24px 18px;border-radius:12px;background:#f6fff6;max-width:400px;margin:auto;text-align:left;box-shadow:0 2px 12px #b0e6b0;">
+          <h3 style="color:#28a745;margin-top:0;">Your Travel Ticket</h3>
+          <p><b>Name:</b> ${name}</p>
+          <p><b>Email:</b> ${email}</p>
+          <p><b>Destination:</b> ${destination}</p>
+          <p><b>Departure:</b> ${departureDate}</p>
+          <p><b>Return:</b> ${returnDate}</p>
+          <hr style="margin:12px 0;">
+          <p style="color:#218838;font-weight:bold;">A copy of this ticket has been sent to your email address.</p>
+          <p style="font-size:0.95rem;color:#555;">Show this ticket at the time of travel. Safe journey!</p>
+        </div>
+      `;
+        document.getElementById("ticket-container").innerHTML = ticketHTML;
+        document.getElementById("ticket-container").style.display = "block";
+
+        // Send email using EmailJS
+        emailjs
+          .send("service_o5czuxa", "template_9iqex0d", {
+            email: email, // <-- change this key to 'email'
+            user_name: name,
+            destination: destination,
+            departure: departureDate,
+            return: returnDate,
+            to_email: email, // keep this for the template to show the email
+          })
+          .then(function (response) {
+            console.log("✅ Email sent!", response.status, response.text);
+          })
+          .catch(function (error) {
+            console.error("❌ Email sending failed:", error);
+
+            let message = "Failed to send ticket email.";
+
+            if (error && error.text) {
+              message += `\nReason: ${error.text}`;
+            } else if (typeof error === "string") {
+              message += `\nError: ${error}`;
+            } else if (error && error.status) {
+              message += `\nStatus: ${error.status}`;
+            } else {
+              message += `\nUnknown error occurred. Check the console.`;
+            }
+
+            alert(message);
+          });
+
+        form.reset();
+        setMinBookingDates();
+      });
+    </script>
+  </body>
+</html>
