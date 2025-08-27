@@ -58,35 +58,6 @@
   </head>
   <body>
     <div class="container">
-      <!-- Login Form -->
-      <section>
-        <h2>Login to Travelling Site</h2>
-        <form id="user-login-form">
-          <div class="form-group">
-            <label for="login-email">Email</label>
-            <input type="email" id="login-email" required />
-          </div>
-          <div class="form-group">
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" required />
-          </div>
-          <div class="form-group">
-            <button type="submit">Login</button>
-          </div>
-        </form>
-      </section>
-
-      <!-- Newsletter Signup -->
-      <section>
-        <h2>Sign up to our newsletter</h2>
-        <p>Receive latest news and updates every week</p>
-        <input
-          type="email"
-          id="search2"
-          placeholder="Enter your email address"
-        />
-      </section>
-
       <!-- Travel Booking Form -->
       <footer>
         <h2>Book Your Travel</h2>
@@ -132,16 +103,6 @@
         document.getElementById("return").setAttribute("min", minDate);
       }
       setMinBookingDates();
-
-      // Login demo
-      document
-        .getElementById("user-login-form")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-          const email = document.getElementById("login-email").value;
-          alert(`Logged in as: ${email}`);
-          this.reset();
-        });
 
       // Travel booking handler
       const form = document.getElementById("travel-form");
@@ -197,12 +158,12 @@
         // Send email using EmailJS
         emailjs
           .send("service_o5czuxa", "template_9iqex0d", {
-            email: email, // <-- change this key to 'email'
+            email: email,
             user_name: name,
             destination: destination,
             departure: departureDate,
             return: returnDate,
-            to_email: email, // keep this for the template to show the email
+            to_email: email,
           })
           .then(function (response) {
             console.log("✅ Email sent!", response.status, response.text);
