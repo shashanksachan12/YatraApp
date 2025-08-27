@@ -260,6 +260,57 @@
       padding: 8px 16px;
       border-radius: 6px;
     }
+    .toggle-bar {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      width: 38px;
+      height: 38px;
+      margin-left: 18px;
+    }
+    .toggle-bar span {
+      height: 4px;
+      width: 100%;
+      background: #fff;
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100vw;
+        background: #0a2239;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 0;
+        display: none;
+        z-index: 100;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links a, .nav-links button {
+        margin: 18px 0;
+        width: 90vw;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+      .toggle-bar {
+        display: flex;
+      }
+      .top {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
     h2 {
       text-align: center;
       color: #0a2239;
@@ -276,9 +327,14 @@
       <div class="top">
         <div id="logo">
           <img src="assets/logo.jpg" alt="logo" width="50" />
-            <h1 class="logo-title"><b>YatraApp</b></h1>
+          <h1 class="logo-title"><b>YatraApp</b></h1>
         </div>
-        <nav class="nav-links">
+        <div class="toggle-bar" id="toggle-bar" aria-label="Toggle navigation" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav class="nav-links" id="nav-links">
           <a href="#phase1">Home</a>
           <a href="about.html">About</a>
           <a href="package.html">Package</a>
@@ -605,6 +661,23 @@
           </ul>
         </div>
       `;
+    });
+  </script>
+  <script>
+    // Toggle bar for mobile nav
+    const toggleBar = document.getElementById('toggle-bar');
+    const navLinks = document.getElementById('nav-links');
+    toggleBar.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+    toggleBar.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') navLinks.classList.toggle('open');
+    });
+    // Close nav on link click (mobile)
+    Array.from(navLinks.querySelectorAll('a')).forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 900) navLinks.classList.remove('open');
+      });
     });
   </script>
 </body>
