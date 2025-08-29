@@ -7,16 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav style="background:#0a2239;color:#fff;padding:16px 0 12px 0;box-shadow:0 2px 8px #eee;">
-        <div style="max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;">
-            <div style="font-size:2rem;font-weight:bold;letter-spacing:2px;">Travel Explorer</div>
-            <div style="display:flex;gap:18px;">
-                <a href="index.html" style="color:#fff;text-decoration:none;font-size:1.1rem;">Home</a>
-                <a href="package.html" style="color:#fff;text-decoration:none;font-size:1.1rem;">Packages</a>
-                <a href="login.html" style="color:#fff;text-decoration:none;font-size:1.1rem;">Login</a>
-            </div>
+    <header>
+      <div class="top">
+        <div id="logo">
+          <img src="assets/logo.jpg" alt="logo" width="50" />
+          <h1 class="logo-title"><b>YatraApp</b></h1>
         </div>
-    </nav>
+        <div class="toggle-bar" id="toggle-bar" aria-label="Toggle navigation" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="package.html">Package</a>
+          <a href="blog.html">Blog</a>
+          <button><a href="login.html">Log in</a></button>
+        </nav>
+      </div>
+    </header> 
     <div class="container" style="max-width:1100px;margin:auto;padding:0 10px;">
         <!-- Hero Section -->
         <section style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px 0;margin:30px 0 20px 0;">
@@ -248,7 +258,7 @@
             <img id="modalImage" src="" alt="Preview" style="max-width:80vw;max-height:80vh;display:block;margin:auto;box-shadow:0 0 20px #000;">
         </div>
 
-        <a href="index.html"><button> Home </button></a>
+       
     </div>
 
     <script>
@@ -303,5 +313,14 @@
     }
     window.scrollToTop = scrollToTop;
     </script>
+    <script>
+  // Select hamburger toggle and nav menu
+  const toggleBar = document.querySelector('.toggle-bar');
+  const navLinks = document.querySelector('nav.nav-links');
+
+  toggleBar.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 </body>
 </html>

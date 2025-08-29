@@ -190,5 +190,14 @@
         setMinBookingDates();
       });
     </script>
+    <script>
+  // Select hamburger toggle and nav menu
+  const toggleBar = document.querySelector('.toggle-bar');
+  const navLinks = document.querySelector('nav.nav-links');
+
+  toggleBar.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
   </body>
 </html>

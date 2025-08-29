@@ -5,323 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YatraApp - Your Travel Partner</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Inline-to-internal CSS conversion */
-    /* Logo and header */
-    #logo img {
-      vertical-align: middle;
-    }
-    .logo-title {
-      display: inline-block;
-      margin-left: 10px;
-      color: #e5ecea;
-    }
-    /* Hero Section */
-    .phase1 {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 32px;
-      margin-top: 20px;
-    }
-    .content1 {
-      flex: 1 1 340px;
-      min-width: 260px;
-    }
-    .hero-title {
-      font-size: 2.5rem;
-      line-height: 1.1;
-    }
-    .hero-desc {
-      font-size: 1.2rem;
-    }
-    .search-form {
-      margin-top: 18px;
-      display: flex;
-      gap: 10px;
-    }
-    .search-input {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      flex: 1;
-    }
-    .search-btn {
-      padding: 10px 22px;
-      border-radius: 6px;
-      background: #0a2239;
-      color: #fff;
-      border: none;
-    }
-    .hero-img {
-      max-width: 420px;
-      width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px #e0e0e0;
-    }
-    /* Trending Destinations */
-    .trending-destinations-section {
-      margin-top: 50px;
-      margin-bottom: 50px;
-      padding: 20px;
-    }
-    .trending-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      margin-top: 20px;
-      margin-left: 20px;
-      margin-right: 20px;
-      margin-bottom: 20px;
-    }
-    .trend-card {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 12px #ddd;
-      overflow: hidden;
-    }
-    .trend-card-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .trend-card-content {
-      padding: 16px;
-    }
-    /* Weather Section */
-    .live-weather-section {
-      margin-top: 60px;
-      background: #fff;
-      padding: 40px 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .weather-title {
-      text-align: center;
-      font-size: 2rem;
-      color: #0a2239;
-      margin-bottom: 20px;
-    }
-    .weather-form {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .weather-input {
-      flex: 1 1 240px;
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      width: 120px;
-      font-size: 1rem;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-      transition: 0.3s;
-    }
-    .weather-btn {
-      padding: 12px 24px;
-      border-radius: 10px;
-      background: #0a2239;
-      width: 120px;
-      color: white;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: 0.3s;
-    }
-    .weather-btn span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .weather-btn-icon {
-      width: 20px;
-      height: 20px;
-    }
-    .weather-result {
-      margin-top: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    /* Travel Tech & Inspiration */
-    .travel-tech-inspiration-section {
-      margin-top: 50px;
-    }
-    .travel-tech-flex {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 36px;
-      align-items: center;
-      justify-content: center;
-    }
-    .travel-tech-card {
-      flex: 1 1 320px;
-      min-width: 260px;
-      max-width: 420px;
-      background: #fff;
-      border-radius: 14px;
-      padding: 24px 18px;
-    }
-    .travel-tech-list {
-      margin: 0 0 0 18px;
-    }
-    .travel-video-card {
-      flex: 1 1 320px;
-      min-width: 260px;
-      max-width: 420px;
-    }
-    .travel-video-frame {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px #e0e0e0;
-    }
-    .travel-video-frame iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    /* Footer */
-    .footer-section {
-      background: #0a2239;
-      color: #fff;
-      padding: 32px 0 16px 0;
-      margin-top: 60px;
-    }
-    .footer-flex {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1100px;
-      margin: auto;
-      gap: 24px;
-    }
-    .footer-brand, .footer-social, .footer-contact {
-      flex: 1 1 220px;
-      min-width: 180px;
-    }
-    .footer-social {
-      text-align: center;
-    }
-    .footer-contact {
-      text-align: right;
-    }
-    .footer-social a {
-      margin: 0 8px;
-      display: inline-block;
-    }
-    .footer-social img {
-      width: 28px;
-      height: 28px;
-    }
-    .footer-copyright {
-      text-align: center;
-      margin-top: 24px;
-      font-size: 0.95rem;
-      opacity: 0.7;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f7fa;
-    }
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-    }
-    header, footer {
-      text-align: center;
-      padding: 20px 0;
-      background: #0a2239;
-      color: white;
-    }
-    .nav-links a, .nav-links button a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: white;
-    }
-    .nav-links button {
-      background: #43cea2;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-    }
-    .toggle-bar {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      cursor: pointer;
-      width: 38px;
-      height: 38px;
-      margin-left: 18px;
-    }
-    .toggle-bar span {
-      height: 4px;
-      width: 100%;
-      background: #fff;
-      margin: 5px 0;
-      border-radius: 2px;
-      transition: 0.3s;
-      display: block;
-    }
-    @media (max-width: 900px) {
-      .nav-links {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100vw;
-        background: #0a2239;
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        padding: 0;
-        display: none;
-        z-index: 100;
-      }
-      .nav-links.open {
-        display: flex;
-      }
-      .nav-links a, .nav-links button {
-        margin: 18px 0;
-        width: 90vw;
-        text-align: center;
-        font-size: 1.2rem;
-      }
-      .toggle-bar {
-        display: flex;
-      }
-      .top {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-    h2 {
-      text-align: center;
-      color: #0a2239;
-    }
-    input, button {
-      font-size: 1rem;
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
     <!-- HEADER -->
     <header>
       <div class="top">
@@ -335,7 +20,7 @@
           <span></span>
         </div>
         <nav class="nav-links" id="nav-links">
-          <a href="#phase1">Home</a>
+          <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="package.html">Package</a>
           <a href="blog.html">Blog</a>
@@ -343,6 +28,7 @@
         </nav>
       </div>
     </header>
+    <div class="container">
 
     <!-- MAIN CONTENT -->
     <main>
@@ -405,6 +91,34 @@
             <div class="trend-card-content">
               <h3>Machu Picchu, Peru</h3>
               <p>Ancient Incan city set high in the Andes mountains.</p>
+            </div>
+          </div>
+          <div class="trend-card">
+            <img src="assets/mussoorie.jpg" alt="Mussoorie" class="trend-card-img">
+            <div class="trend-card-content">
+              <h3>Mussoorie, Uttarakhand</h3>
+              <p>Queen of Hills with scenic views and colonial charm.</p>
+            </div>
+          </div>
+          <div class="trend-card">
+            <img src="assets/mussoorie.jpg" alt="Mussoorie" class="trend-card-img">
+            <div class="trend-card-content">
+              <h3>Mussoorie, Uttarakhand</h3>
+              <p>Queen of Hills with scenic views and colonial charm.</p>
+            </div>
+          </div>
+          <div class="trend-card">
+            <img src="assets/mussoorie.jpg" alt="Mussoorie" class="trend-card-img">
+            <div class="trend-card-content">
+              <h3>Mussoorie, Uttarakhand</h3>
+              <p>Queen of Hills with scenic views and colonial charm.</p>
+            </div>
+          </div>
+          <div class="trend-card">
+            <img src="assets/mussoorie.jpg" alt="Mussoorie" class="trend-card-img">
+            <div class="trend-card-content">
+              <h3>Mussoorie, Uttarakhand</h3>
+              <p>Queen of Hills with scenic views and colonial charm.</p>
             </div>
           </div>
         </div>
@@ -518,9 +232,9 @@
         </div>
         <div class="footer-social">
           <h3 style="margin-bottom:8px;font-size:1.1rem;">Follow Us</h3>
-          <a href="https://www.instagram.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
-          <a href="https://www.facebook.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
-          <a href="https://twitter.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"></a>
+          <a class="footer-icon" href="https://www.instagram.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+          <a class="footer-icon" href="https://www.facebook.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+          <a class="footer-icon" href="https://twitter.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"></a>
         </div>
         <div class="footer-contact">
           <h3 style="margin-bottom:8px;font-size:1.1rem;">Contact</h3>
@@ -664,21 +378,14 @@
     });
   </script>
   <script>
-    // Toggle bar for mobile nav
-    const toggleBar = document.getElementById('toggle-bar');
-    const navLinks = document.getElementById('nav-links');
-    toggleBar.addEventListener('click', function() {
-      navLinks.classList.toggle('open');
-    });
-    toggleBar.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') navLinks.classList.toggle('open');
-    });
-    // Close nav on link click (mobile)
-    Array.from(navLinks.querySelectorAll('a')).forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 900) navLinks.classList.remove('open');
-      });
-    });
-  </script>
+  // Select hamburger toggle and nav menu
+  const toggleBar = document.querySelector('.toggle-bar');
+  const navLinks = document.querySelector('nav.nav-links');
+
+  toggleBar.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+
 </body>
 </html>

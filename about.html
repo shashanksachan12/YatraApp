@@ -5,8 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>About Us</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="about.css" />
   </head>
   <body>
+    <!-- HEADER -->
+    <header>
+      <div class="top">
+        <div id="logo">
+          <img src="assets/logo.jpg" alt="logo" width="50" />
+          <h1 class="logo-title"><b>YatraApp</b></h1>
+        </div>
+        <div class="toggle-bar" id="toggle-bar" aria-label="Toggle navigation" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="package.html">Package</a>
+          <a href="blog.html">Blog</a>
+          <button><a href="login.html">Log in</a></button>
+        </nav>
+      </div>
+    </header>
     <div class="container1">
       <section>
         <div class="phase2" id="phase2">
@@ -111,20 +133,18 @@
     </p>
   </div>
 
-  <!-- Home Button -->
-  <div style="margin-top: 30px; text-align: center;">
-    <a href="index.html">
-      <button 
-        style="padding: 12px 24px; background: #0a2239; color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease;"
-        onmouseover="this.style.background='#10325a'; this.style.transform='scale(1.05)'"
-        onmouseout="this.style.background='#0a2239'; this.style.transform='scale(1)'"
-      >
-        🏠 Home
-      </button>
-    </a>
-  </div>
+
 </section>
 
     </div>
+    <script>
+  // Select hamburger toggle and nav menu
+  const toggleBar = document.querySelector('.toggle-bar');
+  const navLinks = document.querySelector('nav.nav-links');
+
+  toggleBar.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
   </body>
 </html>
